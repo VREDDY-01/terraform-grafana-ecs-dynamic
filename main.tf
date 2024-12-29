@@ -10,3 +10,12 @@ module "load_balancers" {
   listeners = var.listeners
   security_groups = module.security_groups.security_group_ids
 }
+
+module "ecs_service" {
+  source = "./modules/ecs"
+  ecs_clusters = var.ecs_clusters
+  task_definitions = var.task_definitions
+  security_groups = module.security_groups.security_group_ids
+  ecs_services = var.ecs_services
+  target_group_arns = module.load_balancers.target_group_arns
+}

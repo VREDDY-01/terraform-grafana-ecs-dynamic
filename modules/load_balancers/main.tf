@@ -29,6 +29,7 @@ resource "aws_lb_target_group" "this" {
   port     = each.value.port
   protocol = each.value.protocol
   vpc_id   = data.aws_vpc.default.id
+  target_type = "ip"
 
   health_check {
     path                = each.value.health_check.path
